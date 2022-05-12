@@ -1,14 +1,22 @@
 import React from "react";
+import Footer from "../shared/Footer";
+import AppoinmentSection from "./AppoinmentSection";
 import Banner from "./Banner";
-import InfoCards from "./info/InfoCards";
+import ContactSection from "./ContactSection";
 import Services from "./Services";
+import Testimonials from "./Testimonials";
+import Treatment from "./Treatment";
 
 const Home = () => {
   return (
-    <div className="container mx-auto">
-      <Banner/>
-      <InfoCards/>
-      <Services/> 
+    <div>
+      <Banner />
+      <Services />
+      <Treatment />
+      <AppoinmentSection />
+      <Testimonials />
+      <ContactSection />
+      <Footer />
     </div>
   );
 };
