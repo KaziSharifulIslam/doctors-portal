@@ -6,9 +6,9 @@ import InfoCards from "./info/InfoCards";
 
 const Banner = () => {
   return (
-    <div className="min-h-screen flex justify-center flex-col container mx-auto py-16 px-4">
+    <div style={{background: `url(${bg})`}} className="min-h-screen flex justify-center flex-col container mx-auto py-16 px-4">
       <div
-        className="container mx-auto "
+        className="container mx-auto pb-24"
         style={{ backgroundImage: `url: ${bg}` }}
       >
         <div className="flex flex-col lg:flex-row-reverse">

@@ -1,3 +1,4 @@
+import "react-day-picker/dist/style.css";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./pages/about/About";
@@ -11,7 +12,7 @@ import Navbar from "./pages/shared/Navbar";
 function App() {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
