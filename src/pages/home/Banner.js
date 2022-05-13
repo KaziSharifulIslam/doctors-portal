@@ -18,7 +18,7 @@ const Banner = () => {
             alt=""
           />
           <div className="sm:py-8">
-            <h1 className="text-6xl font-bold">Your New Smile Starts Here</h1>
+            <h1 className="text-3xl lg:text-6xl font-bold">Your New Smile Starts Here</h1>
             <p className="py-6">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
