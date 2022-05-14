@@ -1,5 +1,6 @@
 import "react-day-picker/dist/style.css";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import About from "./pages/about/About";
 import Appointment from "./pages/appointment/Appointment";
@@ -8,6 +9,8 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Reviews from "./pages/reviews/Reviews";
 import Navbar from "./pages/shared/Navbar";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <ToastContainer/>
     </div>
   );
 }
