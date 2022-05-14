@@ -31,6 +31,6 @@ async function run() {
 }
 run().catch(console.dir);
 app.get("/", (req, res) => {
-  res.send("Hey, Bangladeshi Mango people!");
+  res.send("Hello Heroku!!");
 });
 app.listen(port, () => console.log(`listening at http://localhost:${port}`));
