@@ -1,7 +1,14 @@
+import auth from "firebase.init";
+import { signOut } from "firebase/auth";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import "./navbar.css";
 
 const Navbar = () => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+console.log(user);
   const menuItems = (
     <>
       <li>
@@ -19,16 +26,22 @@ const Navbar = () => {
       <li>
         <Link to="/contact-us">Contact Us</Link>
       </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
+      {!user && (
+        <li>
+          <Link className="btn btn-outline btn-secondary login-btn" to="/login">
+            Login
+          </Link>
+        </li>
+      )}
     </>
   );
   return (
     <div className="container mx-auto">
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link className="font-bold text-3xl" to="/">Doctors Portal</Link>
+          <Link className="font-bold text-3xl" to="/">
+            Doctors Portal
+          </Link>
         </div>
         <div className="flex-none gap-2">
           {/* desktop menu  */}
@@ -63,6 +76,51 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
+          {/* profile menu  */}
+          {user && (
+            <div className="dropdown dropdown-end">
+              <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full ring ring-primary">
+                  <img
+                    src={
+                      user.photoURL
+                        ? user.photoURL
+                        : `https://api.lorem.space/image/face?hash=33791`
+                    }
+                    alt=""
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex="0"
+                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+              >
+                {user.displayName && (
+                  <li>
+                    <a href="#!" className="justify-between">
+                     { user?.displayName}
+                    </a>
+                  </li>
+                )}
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  {user && (
+                    <button
+                      className=""
+                      onClick={() => {
+                        signOut(auth);
+                        navigate("/");
+                      }}
+                    >
+                      Log Out
+                    </button>
+                  )}
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

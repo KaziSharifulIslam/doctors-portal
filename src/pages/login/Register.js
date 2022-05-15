@@ -2,6 +2,7 @@ import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -17,9 +18,19 @@ const Register = () => {
   } = useForm();
   const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useCreateUserWithEmailAndPassword(auth);
-  if (error || emailError) toast.error(error?.message || emailError?.message);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  // react hook form
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data?.email, data?.password);
+    await updateProfile({displayName: data.name})
+    console.log(data);
+  };
+
+
+  if (error || emailError || updateError) toast.error(error?.message || emailError?.message || updateError.message);
   let spinner = "";
-  if (loading || emailLoading) {
+  if (loading || emailLoading || updating) {
     spinner = (
       <svg
         role="status"
@@ -42,14 +53,10 @@ const Register = () => {
 
   if (user || emailUser) {
     console.dir(user || emailUser);
-    toast.info("User Created Successfully");
+    toast.success("User Created Successfully");
   }
 
-  // react hook form
-  const onSubmit = (data) => {
-    console.log(data);
-    createUserWithEmailAndPassword(data?.email, data?.password);
-  };
+
 
   return (
     <div className="flex h-max justify-center items-center">
@@ -142,6 +149,7 @@ const Register = () => {
                   message: "Minimum six characters",
                 },
               })}
+              type="password"
               placeholder="Password"
               className="input input-bordered w-full max-w-xs input-primary"
               autoComplete="off"

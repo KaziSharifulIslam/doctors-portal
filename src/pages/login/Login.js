@@ -107,7 +107,7 @@ const Login = () => {
                 )}
               </div>
             </label>
-            <input
+            <input 
               {...register("password", {
                 required: {
                   value: true,
@@ -118,6 +118,7 @@ const Login = () => {
                   message: "Minimum six characters",
                 },
               })}
+              type="password"
               placeholder="Password"
               className="input input-bordered w-full max-w-xs input-primary"
               autoComplete="off"
