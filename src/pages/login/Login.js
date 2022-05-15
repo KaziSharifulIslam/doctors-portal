@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -23,6 +23,13 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
+  useEffect(() => {
+    if (user || emailUser) {
+      console.dir(user || emailUser);
+      navigate(from, { replace: true });
+    }
+  }, [user, emailUser, from, navigate]);
+
   let spinner = "";
   if (loading || emailLoading) {
     spinner = (
@@ -45,12 +52,6 @@ const Login = () => {
     );
   }
   if (error || emailError) toast.error(error?.message || emailError?.message);
-  if (user || emailUser) {
-    console.dir(user || emailUser);
-    toast.success("User logged in");
-    // redirect user after login
-    navigate(from, { replace: true });
-  }
 
   // react hook form
   const onSubmit = (data) => {
