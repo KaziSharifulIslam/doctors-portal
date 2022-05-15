@@ -5,10 +5,13 @@ import Primarybutton from "../shared/Primarybutton";
 
 const AppoinmentSection = () => {
   return (
-    <section style={{ background: `url(${appointment})` }} className="my-20 px-4">
+    <section
+      style={{ background: `url(${appointment})` }}
+      className="my-20 px-4"
+    >
       <div className="flex items-center justify-center container mx-auto">
         <div className="flex-1 lg:flex-3 hidden lg:block mt-[-100px] lg:mt-[-150px] ">
-          <img src={doctor} alt=""/>
+          <img src={doctor} alt="" />
         </div>
         <div className="flex-1 text-white py-20 xl:py-0">
           <h2 className="text-3xl mb-4 text-primary">Appointment</h2>
@@ -21,7 +24,7 @@ const AppoinmentSection = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page
           </p>
-          <Primarybutton>Get Started</Primarybutton>
+          <Primarybutton go="/appointment">Get Started</Primarybutton>
         </div>
       </div>
     </section>

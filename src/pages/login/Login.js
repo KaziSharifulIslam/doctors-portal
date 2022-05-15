@@ -4,7 +4,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
@@ -17,7 +17,12 @@ const Login = () => {
   } = useForm();
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useSignInWithEmailAndPassword(auth);
-  if (error || emailError) toast.error(error?.message || emailError?.message);
+
+  // important for redirecting user after login
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   let spinner = "";
   if (loading || emailLoading) {
     spinner = (
@@ -39,15 +44,16 @@ const Login = () => {
       </svg>
     );
   }
-
+  if (error || emailError) toast.error(error?.message || emailError?.message);
   if (user || emailUser) {
     console.dir(user || emailUser);
-    toast.info("User logged in");
+    toast.success("User logged in");
+    // redirect user after login
+    navigate(from, { replace: true });
   }
 
   // react hook form
   const onSubmit = (data) => {
-    console.log(data);
     signInWithEmailAndPassword(data?.email, data?.password);
   };
 
@@ -107,7 +113,7 @@ const Login = () => {
                 )}
               </div>
             </label>
-            <input 
+            <input
               {...register("password", {
                 required: {
                   value: true,

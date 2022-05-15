@@ -1,8 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Primarybutton = ({children}) => {
+const Primarybutton = ({ children, go }) => {
+  const navigate = useNavigate();
+  const navigateTo = () => {
+    if (go) navigate(`${go}`);
+  };
   return (
-    <button className="btn btn-secondary bg-gradient-to-r from-primary to-secondary text-white">
+    <button
+      onClick={navigateTo}
+      className="btn btn-secondary bg-gradient-to-r from-primary to-secondary text-white"
+    >
       {children}
     </button>
   );

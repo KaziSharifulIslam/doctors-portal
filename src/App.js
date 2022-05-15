@@ -1,4 +1,5 @@
 import Register from "pages/login/Register";
+import Protected from "pages/shared/Protected";
 import "react-day-picker/dist/style.css";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -20,7 +21,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/appointment" element={<Appointment />} />
+        <Route
+          path="/appointment"
+          element={
+            <Protected>
+              <Appointment />
+            </Protected>
+          }
+        />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/login" element={<Login />} />

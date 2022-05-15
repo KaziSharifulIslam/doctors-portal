@@ -8,7 +8,7 @@ import "./navbar.css";
 const Navbar = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-console.log(user);
+// console.log(user);
   const menuItems = (
     <>
       <li>
@@ -103,7 +103,7 @@ console.log(user);
                   </li>
                 )}
                 <li>
-                  <a>Settings</a>
+                  <a href="#!">Settings</a>
                 </li>
                 <li>
                   {user && (
