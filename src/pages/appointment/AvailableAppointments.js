@@ -6,7 +6,7 @@ const AvailableAppointments = ({ date }) => {
   const [treatment, setTreatment] = useState(null);
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/service")
+    fetch("https://salty-citadel-52323.herokuapp.com/service")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
