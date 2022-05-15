@@ -28,9 +28,7 @@ const Navbar = () => {
     <div className="container mx-auto">
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a href="#!" className="btn btn-ghost normal-case text-xl">
-            Doctors Portal
-          </a>
+          <Link className="font-bold text-3xl" to="/">Doctors Portal</Link>
         </div>
         <div className="flex-none gap-2">
           {/* desktop menu  */}

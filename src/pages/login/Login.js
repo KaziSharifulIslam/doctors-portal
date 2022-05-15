@@ -4,6 +4,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
@@ -39,7 +40,10 @@ const Login = () => {
     );
   }
 
-  if (user || emailUser) console.dir(user || emailUser);
+  if (user || emailUser) {
+    console.dir(user || emailUser);
+    toast.info("User logged in");
+  }
 
   // react hook form
   const onSubmit = (data) => {
@@ -48,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen justify-center items-center">
+    <div className="flex h-max justify-center items-center">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body text-center">
           <h2 className="text-center font-bold text-2xl">Login</h2>
@@ -122,13 +126,21 @@ const Login = () => {
             <button className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white">
               {emailLoading && spinner} Login
             </button>
+            <p className="text-sm text-center">
+              New to Doctors Portal?{" "}
+              <Link to="/signup" className="text-secondary">
+                Create new account
+              </Link>{" "}
+            </p>
           </form>
           <div className="divider">OR</div>
+          {/* sign in with google  */}
+
           <button
             onClick={() => signInWithGoogle()}
             className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white"
           >
-            {loading &&  spinner} Sign in with Google
+            {loading && spinner} continue with Google
           </button>
         </div>
       </div>
