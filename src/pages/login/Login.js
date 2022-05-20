@@ -59,97 +59,99 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-max justify-center items-center">
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="card-body text-center">
-          <h2 className="text-center font-bold text-2xl">Login</h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3">
-            {/* email with label warning*/}
-            <label className="label pb-0">
-              <span className="label-text">Your Email</span>
-              <div>
-                {/*  error msg as label  */}
-                {errors.email?.type === "required" && (
-                  <span className="text-sm text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
-                {errors.email?.type === "pattern" && (
-                  <span className="text-sm text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
-              </div>
-            </label>
-            <input
-              {...register("email", {
-                required: {
-                  value: true,
-                  message: "Email is required",
-                },
-                pattern: {
-                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Provide a valid email",
-                },
-              })}
-              type="email"
-              placeholder="Email"
-              className="input input-bordered w-full max-w-xs input-primary"
-            />
+    <div>
+      <div className="flex h-max mt-20 justify-center items-center">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card-body text-center">
+            <h2 className="text-center font-bold text-2xl">Login</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3">
+              {/* email with label warning*/}
+              <label className="label pb-0">
+                <span className="label-text">Your Email</span>
+                <div>
+                  {/*  error msg as label  */}
+                  {errors.email?.type === "required" && (
+                    <span className="text-sm text-red-500">
+                      {errors.email.message}
+                    </span>
+                  )}
+                  {errors.email?.type === "pattern" && (
+                    <span className="text-sm text-red-500">
+                      {errors.email.message}
+                    </span>
+                  )}
+                </div>
+              </label>
+              <input
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "Email is required",
+                  },
+                  pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: "Provide a valid email",
+                  },
+                })}
+                type="email"
+                placeholder="Email"
+                className="input input-bordered w-full max-w-xs input-primary"
+              />
 
-            {/* password  */}
-            <label className="label pb-0">
-              <span className="label-text">Password</span>
-              {/* label for password error message  */}
-              <div>
-                {errors.password?.type === "required" && (
-                  <span className="text-sm text-red-500">
-                    {errors.password.message}
-                  </span>
-                )}
-                {errors.password?.type === "minLength" && (
-                  <span className="text-sm text-red-500">
-                    {errors.password.message}
-                  </span>
-                )}
-              </div>
-            </label>
-            <input
-              {...register("password", {
-                required: {
-                  value: true,
-                  message: "Password is required",
-                },
-                minLength: {
-                  value: 6,
-                  message: "Minimum six characters",
-                },
-              })}
-              type="password"
-              placeholder="Password"
-              className="input input-bordered w-full max-w-xs input-primary"
-              autoComplete="off"
-            />
+              {/* password  */}
+              <label className="label pb-0">
+                <span className="label-text">Password</span>
+                {/* label for password error message  */}
+                <div>
+                  {errors.password?.type === "required" && (
+                    <span className="text-sm text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <span className="text-sm text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </div>
+              </label>
+              <input
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Minimum six characters",
+                  },
+                })}
+                type="password"
+                placeholder="Password"
+                className="input input-bordered w-full max-w-xs input-primary"
+                autoComplete="off"
+              />
 
-            <button className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white">
-              {emailLoading && spinner} Login
+              <button className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white">
+                {emailLoading && spinner} Login
+              </button>
+              <p className="text-sm text-center">
+                New to Doctors Portal?{" "}
+                <Link to="/signup" className="text-secondary">
+                  Create new account
+                </Link>{" "}
+              </p>
+            </form>
+            <div className="divider">OR</div>
+            {/* sign in with google  */}
+
+            <button
+              onClick={() => signInWithGoogle()}
+              className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white"
+            >
+              {loading && spinner} continue with Google
             </button>
-            <p className="text-sm text-center">
-              New to Doctors Portal?{" "}
-              <Link to="/signup" className="text-secondary">
-                Create new account
-              </Link>{" "}
-            </p>
-          </form>
-          <div className="divider">OR</div>
-          {/* sign in with google  */}
-
-          <button
-            onClick={() => signInWithGoogle()}
-            className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white"
-          >
-            {loading && spinner} continue with Google
-          </button>
+          </div>
         </div>
       </div>
     </div>

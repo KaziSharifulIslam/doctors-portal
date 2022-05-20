@@ -5,8 +5,8 @@ import "./calender.css";
 
 const AppointBanner = ({ date, setDate }) => {
   return (
-    <div className="min-h-screen flex justify-center flex-col container mx-auto py-16 px-4">
-      <div className="container mx-auto pb-24">
+    <div className="flex justify-center flex-col container mx-auto py-16 px-4">
+      <div className="container mx-auto">
         <div className="flex items-center justify-around flex-col lg:flex-row-reverse">
           <div>
             {" "}

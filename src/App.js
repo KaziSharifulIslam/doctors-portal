@@ -1,4 +1,7 @@
+import Dashboard from "pages/dashboard/Dashboard";
+import MyAppointments from "pages/dashboard/MyAppointments";
 import Register from "pages/login/Register";
+import NotFound from "pages/shared/NotFound";
 import Protected from "pages/shared/Protected";
 import "react-day-picker/dist/style.css";
 import { Route, Routes } from "react-router-dom";
@@ -8,9 +11,9 @@ import "./App.css";
 import About from "./pages/about/About";
 import Appointment from "./pages/appointment/Appointment";
 import Contact from "./pages/contact/Contact";
+import Reviews from "./pages/dashboard/Reviews";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import Reviews from "./pages/reviews/Reviews";
 import Navbar from "./pages/shared/Navbar";
 
 function App() {
@@ -29,10 +32,16 @@ function App() {
             </Protected>
           }
         />
-        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}>
+          <Route index element={<MyAppointments/>} />
+          <Route path="/dashboard/my-appointment" element={<MyAppointments/>} />
+          <Route path="/dashboard/reviews" element={<Reviews/>} />
+        </Route>
+        
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </div>

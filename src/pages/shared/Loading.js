@@ -1,9 +1,8 @@
 import React from "react";
-
 const Loading = () => {
   return (
-    <div className="flex h-screen items-center justify-center ">
-      {/* <p className='loading text-secondary animate-spin'>....</p> */}
+    <div className="flex h-32 items-center justify-center ">
+      {/* <p className='loading text-secondary animate-spin'>... .</p> */}
       <button type="button" className="bg-white" disabled>
         <svg
           role="status"
@@ -26,4 +25,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default Loading

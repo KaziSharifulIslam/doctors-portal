@@ -2,21 +2,45 @@ import { format } from "date-fns";
 import auth from "firebase.init";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 
-const BookingModal = ({ date, treatment, setTreatment}) => {
+const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
+  const formatedDate = format(date, "PP");
   const [user] = useAuthState(auth);
-  const { name, slots } = treatment;
+  const { _id, name, slots } = treatment;
   const handleBooking = (e) => {
     e.preventDefault();
-    const date = e.target.date.value;
-    const serviceName = name;
-    const patientName = e.target.name.value;
-    const phone = e.target.phone.value;
-    const email = e.target.email.value;
     const slot = e.target.slot.value;
-    const booking = {date, patientName, serviceName, phone, email, slot };
-    console.log(booking);
-    setTreatment(null)
+    const booking = {
+      treatment: name,
+      treatmentId: _id,
+      date: formatedDate,
+      slot: slot,
+      patientName: user.displayName,
+      email: user.email,
+      phone: e.target.phone.value,
+    };
+    fetch("https://doctors-portal-ks.herokuapp.com/booking", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          toast.success(
+            `${booking.treatment} is appointed on ${formatedDate} at ${slot}`
+          );
+          refetch();
+          setTreatment(null);
+        } else {
+          toast.error(
+            `${booking.treatment} is already appointed on ${formatedDate} at ${slot}`
+          );
+        }
+      });
+    // console.log(booking);
   };
   return (
     <div>
@@ -50,19 +74,20 @@ const BookingModal = ({ date, treatment, setTreatment}) => {
               className="select select-secondary w-full max-w-xs"
             >
               {slots.map((slot, index) => (
-                <option key={index} value={slot}>{slot}</option>
-                
+                <option key={index} value={slot}>
+                  {slot}
+                </option>
               ))}
             </select>
             <input
               type="text"
-              value={user?.displayName}
-              disabled
+              defaultValue={user?.displayName }
+              disabled={user.displayName}
               className="input input-bordered input-primary w-full max-w-xs"
               name="name"
               required
             />
-           
+
             <input
               type="email"
               value={user?.email}
@@ -71,12 +96,12 @@ const BookingModal = ({ date, treatment, setTreatment}) => {
               name="email"
               required
             />
-             <input
+            <input
               type="number"
               placeholder="Phone Number"
               className="input input-bordered input-primary w-full max-w-xs"
               name="phone"
-              required
+              
             />
             <input
               type="submit"
