@@ -8,7 +8,7 @@ const MyAppointments = () => {
   // console.log(user);
   const [appointments, setAppointments] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/appointments/?email=${user?.email}`)
+    fetch(`https://doctors-portal-ks.herokuapp.com/appointments/?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
