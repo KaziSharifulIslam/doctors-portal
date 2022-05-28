@@ -12,21 +12,21 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="active:btn-accent" to="/">Home</Link>
       </li>
       <li tabIndex="0">
-        <Link to="/about">About</Link>
+        <Link className="active:btn-accent" to="/about">About</Link>
       </li>
       <li>
-        <Link to="/appointment">Appointment</Link>
+        <Link className="active:btn-accent" to="/appointment">Appointment</Link>
       </li>
 
       <li>
-        <Link to="/contact-us">Contact Us</Link>
+        <Link className="active:btn-accent" to="/contact-us">Contact Us</Link>
       </li>
       {!user && (
         <li>
-          <Link className="btn btn-outline btn-secondary login-btn" to="/login">
+          <Link className="btn btn-outline btn-secondary dark:btn-accent dark:bg-white login-btn" to="/login">
             Login
           </Link>
         </li>
@@ -34,7 +34,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="sticky top-0 bg-white z-50 shadow">
+    <div className="sticky top-0 bg-white dark:bg-accent dark:text-white z-50 shadow">
       <div className="container mx-auto ">
         <div className="navbar">
           <div className="flex-1">
@@ -70,7 +70,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex="0"
-                className="mt-3 bg-white p-2 shadow menu menu-compact dropdown-content rounded-box w-52"
+                className="mt-3 bg-white dark:bg-accent p-2 shadow menu menu-compact dropdown-content rounded-box w-52"
               >
                 {menuItems}
               </ul>
@@ -79,7 +79,7 @@ const Navbar = () => {
             {user && (
               <div className="dropdown dropdown-end">
                 <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full ring ring-primary">
+                  <div className="w-10 rounded-full ring ring-primary dark:ring-accent">
                     <img
                       src={
                         user.photoURL
@@ -92,13 +92,13 @@ const Navbar = () => {
                 </label>
                 <ul
                   tabIndex="0"
-                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
+                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white dark:bg-accent rounded-box w-52"
                 >
                   {user.displayName && (
                     <li>
-                      <a href="#!" className="justify-between">
+                      <Link to="/dashboard/profile" className="justify-between">
                         {user?.displayName}
-                      </a>
+                      </Link>
                     </li>
                   )}
                   <li>

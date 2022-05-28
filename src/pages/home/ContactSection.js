@@ -6,7 +6,7 @@ const ContactSection = () => {
     <section style={{ background: `url(${bg})` }}>
       <div className="container mx-auto py-24">
         <div className="text-center pb-4">
-          <h2 className="text-primary text-2xl mb-3">Contact Us</h2>
+          <h2 className="text-primary dark:text-accent text-2xl mb-3">Contact Us</h2>
           <h3 className="text-4xl text-white mb-4">Stay connected with us</h3>
         </div>
         <div className="text-center flex flex-col items-center justify-center gap-3 px-4">

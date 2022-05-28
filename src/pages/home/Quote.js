@@ -7,7 +7,7 @@ const Quote = ({ quote }) => {
         <p className="mb-4">{quote.quote}</p>
         <div className="flex items-center">
           <div className="avatar mr-5">
-            <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <div className="w-16 rounded-full ring ring-primary dark:ring-accent ring-offset-base-100 ring-offset-2">
               <img src={quote.img} alt="" className="mr-4" />
             </div>
           </div>

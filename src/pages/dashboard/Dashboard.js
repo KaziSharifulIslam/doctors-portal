@@ -11,7 +11,7 @@ const Dashboard = () => {
           {/* <!-- Page content here --> */}
 
           <div className="flex drawer-opener items-center justify-between mx-2">  
-            <h2 className="text-3xl text-secondary my-8">Dashboard</h2>
+            <h2 className="text-3xl text-secondary dark:text-accent my-4">Dashboard</h2>
             <label htmlFor="my-drawer-2" className="btn btn-outline lg:hidden ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +41,9 @@ const Dashboard = () => {
             </li>
             <li>
               <Link to="/dashboard/reviews">My Reviews</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/profile">My Profile</Link>
             </li>
           </ul>
         </div>

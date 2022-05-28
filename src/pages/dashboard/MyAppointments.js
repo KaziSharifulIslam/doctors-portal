@@ -16,7 +16,8 @@ const MyAppointments = () => {
       });
   }, [user]);
   return (
-    <div className="overflow-x-auto  border rounded-lg my-12 mx-2">
+    
+    <div className="overflow-x-auto h-[70vh] border rounded-lg my-12 mx-2">
       <table className="table w-full">
         <thead className="sticky top-0">
           <tr>
@@ -30,7 +31,7 @@ const MyAppointments = () => {
         </thead>
 
         <tbody>
-          {appointments.length < 1 ? <Loading />  :  appointments?.map((a, index) => (
+          {appointments.length < 1 ? <tr><td colSpan="6"><Loading /></td></tr>  :  appointments?.map((a, index) => (
             <tr key={index}>
               <td className="text-xs">{index + 1}</td>
               <td className="text-xs">{a.patientName}</td>

@@ -53,7 +53,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
           >
             ✕
           </label>
-          <h3 className="font-bold text-lg text-secondary">
+          <h3 className="font-bold text-lg text-secondary dark:text-accent">
             Booking for: {name}
           </h3>
           <form
@@ -63,7 +63,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             <input
               type="text"
               placeholder="date"
-              className="input input-bordered input-primary w-full max-w-xs "
+              className="input input-bordered input-primary dark:input-accent w-full max-w-xs "
               value={format(date, "PP")}
               name="date"
               disabled
@@ -71,7 +71,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
 
             <select
               name="slot"
-              className="select select-secondary w-full max-w-xs"
+              className="select select-secondary dark:select-accent w-full max-w-xs"
             >
               {slots.map((slot, index) => (
                 <option key={index} value={slot}>
@@ -83,7 +83,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
               type="text"
               defaultValue={user?.displayName }
               disabled={user.displayName}
-              className="input input-bordered input-primary w-full max-w-xs"
+              className="input input-bordered w-full max-w-xs"
               name="name"
               required
             />
@@ -92,14 +92,14 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
               type="email"
               value={user?.email}
               disabled
-              className="input input-bordered input-primary w-full max-w-xs"
+              className="input input-bordered w-full max-w-xs"
               name="email"
               required
             />
             <input
               type="number"
               placeholder="Phone Number"
-              className="input input-bordered input-primary w-full max-w-xs"
+              className="input input-bordered   w-full max-w-xs"
               name="phone"
               
             />

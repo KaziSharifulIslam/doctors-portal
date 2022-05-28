@@ -9,7 +9,7 @@ const Primarybutton = ({ children, go }) => {
   return (
     <button
       onClick={navigateTo}
-      className="btn btn-secondary bg-gradient-to-r from-primary to-secondary text-white"
+      className="btn btn-secondary bg-gradient-to-r from-primary to-secondary text-white dark:bg-gradient-to-r dark:from-accent dark:to-accent dark:border-none"
     >
       {children}
     </button>

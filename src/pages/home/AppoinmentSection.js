@@ -14,7 +14,7 @@ const AppoinmentSection = () => {
           <img src={doctor} alt="" />
         </div>
         <div className="flex-1 text-white py-20 xl:py-0">
-          <h2 className="text-3xl mb-4 text-primary">Appointment</h2>
+          <h2 className="text-3xl mb-4 text-primary dark:text-accent">Appointment</h2>
           <h3 className="text-4xl py-4">Make an apppoinment Today.</h3>
           <p className="mb-4">
             It is a long established fact that a reader will be distracted by

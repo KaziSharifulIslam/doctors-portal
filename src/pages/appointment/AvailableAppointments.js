@@ -15,20 +15,10 @@ const AvailableAppointments = ({ date, setDate }) => {
 
     if(isLoading) return <Loading/>
     if(error) console.log(error);
-    // useEffect(() => {
-    // fetch(`http://localhost:5000/available/?date=${formatedDate}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setServices(data);
-    //     // console.log(data);
-    //   });
-    // }, [formatedDate]);
-
-  // if (services?.length < 1) return <Loading />;
   return (
     <div>
       <div className="container mx-auto mb-12 pt-24 ">
-        <p className="text-center text-xl text-secondary">
+        <p className="text-center text-xl text-secondary dark:text-accent">
           Available Appointments on {format(date, "PP")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-12">
@@ -57,9 +47,9 @@ const AvailableAppointments = ({ date, setDate }) => {
 const SingleService = ({ service, setTreatment }) => {
   const { name, slots } = service;
   return (
-    <div className="card w-80 max-w-md  shadow-lg text-center mx-auto bg-white">
+    <div className="card w-80 max-w-md  shadow-lg text-center mx-auto">
       <div className="card-body items-center text-center">
-        <h2 className="card-title text-secondary">{name}</h2>
+        <h2 className="card-title text-secondary dark:text-accent">{name}</h2>
         <div className="text-sm">
           <p>{slots[0]}</p>
           <p>{slots[1]}</p>
@@ -67,7 +57,6 @@ const SingleService = ({ service, setTreatment }) => {
           <p>
             {slots.length ? (
               <span>
-                {" "}
                 {slots.length} {slots.length > 1 ? "spaces" : "space"} Available{" "}
               </span>
             ) : (
@@ -81,7 +70,7 @@ const SingleService = ({ service, setTreatment }) => {
             htmlFor="book-modal"
             disabled={!slots.length}
             onClick={() => setTreatment(service)}
-            className="btn btn-sm bg-gradient-to-r from-primary to-secondary text-white border-0 pt-1"
+            className="btn btn-sm bg-gradient-to-r from-primary to-secondary text-white border-0 dark:bg-gradient-to-r dark:from-accent dark:to-accent pt-1"
           >
             Book Appointment
           </label>

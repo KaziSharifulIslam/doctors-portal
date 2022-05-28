@@ -95,7 +95,7 @@ const Login = () => {
                 })}
                 type="email"
                 placeholder="Email"
-                className="input input-bordered w-full max-w-xs input-primary"
+                className="input input-bordered w-full max-w-xs input-primary dark:input-accent"
               />
 
               {/* password  */}
@@ -128,16 +128,16 @@ const Login = () => {
                 })}
                 type="password"
                 placeholder="Password"
-                className="input input-bordered w-full max-w-xs input-primary"
+                className="input input-bordered w-full max-w-xs input-primary dark:input-accent"
                 autoComplete="off"
               />
 
-              <button className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white">
+              <button className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white dark:bg-gradient-to-r dark:from-accent dark:to-accent dark:border-none">
                 {emailLoading && spinner} Login
               </button>
               <p className="text-sm text-center">
                 New to Doctors Portal?{" "}
-                <Link to="/signup" className="text-secondary">
+                <Link to="/signup" className="text-secondary dark:text-accent">
                   Create new account
                 </Link>{" "}
               </p>
@@ -147,7 +147,7 @@ const Login = () => {
 
             <button
               onClick={() => signInWithGoogle()}
-              className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white"
+              className="btn border-0 bg-gradient-to-tr from-primary to-secondary text-white dark:bg-gradient-to-r dark:from-accent dark:to-accent dark:border-none"
             >
               {loading && spinner} continue with Google
             </button>
