@@ -113,6 +113,7 @@ const Navbar = () => {
                         className=""
                         onClick={() => {
                           signOut(auth);
+                          localStorage.removeItem('accessToken')
                           navigate("/");
                         }}
                       >

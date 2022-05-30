@@ -1,3 +1,4 @@
+import useToken from "hooks/useToken";
 import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
@@ -5,7 +6,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
@@ -19,7 +20,8 @@ const Register = () => {
   const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-
+    const [token] = useToken(user || emailUser)
+  const navigate = useNavigate();
   // react hook form
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data?.email, data?.password);
@@ -51,9 +53,9 @@ const Register = () => {
     );
   }
 
-  if (user || emailUser) {
-    console.dir(user || emailUser);
+  if (token) {
     toast.success("User Created Successfully");
+    navigate('/appointment')
   }
 
 

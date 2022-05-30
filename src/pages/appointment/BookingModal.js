@@ -45,7 +45,10 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
   return (
     <div>
       <input type="checkbox" id="book-modal" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
+      <div
+        className="modal modal-bottom sm:modal-middle"
+        style={{ backdropFilter: "blur(4px)" }}
+      >
         <div className="modal-box">
           <label
             htmlFor="book-modal"
@@ -81,7 +84,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             </select>
             <input
               type="text"
-              defaultValue={user?.displayName }
+              defaultValue={user?.displayName}
               disabled={user.displayName}
               className="input input-bordered w-full max-w-xs"
               name="name"
@@ -101,7 +104,6 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
               placeholder="Phone Number"
               className="input input-bordered   w-full max-w-xs"
               name="phone"
-              
             />
             <input
               type="submit"

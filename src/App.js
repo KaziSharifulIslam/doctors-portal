@@ -1,6 +1,6 @@
 import Dashboard from "pages/dashboard/Dashboard";
 import MyAppointments from "pages/dashboard/MyAppointments";
-import UserProfile from "pages/dashboard/UserProfile";
+import Users from "pages/dashboard/Users";
 import Register from "pages/login/Register";
 import NotFound from "pages/shared/NotFound";
 import Protected from "pages/shared/Protected";
@@ -37,7 +37,8 @@ function App() {
           <Route index element={<MyAppointments/>} />
           <Route path="/dashboard/my-appointment" element={<MyAppointments/>} />
           <Route path="/dashboard/reviews" element={<Reviews/>} />
-          <Route path="/dashboard/profile" element={<UserProfile/>} />
+          <Route path="/dashboard/users" element={<Users/>} />
+          {/* <Route path="/dashboard/profile" element={<UserProfile/>} /> */}
         </Route>
         
         <Route path="/contact-us" element={<Contact />} />
