@@ -9,7 +9,6 @@ import "./navbar.css";
 const Navbar = () => {
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
-  console.log(admin)
   const navigate = useNavigate();
   // console.log(user);
   const menuItems = (
@@ -81,7 +80,7 @@ const Navbar = () => {
             {/* profile menu  */}
             {user && (
               <div className="dropdown dropdown-end">
-                <label tabIndex="0" className={`btn btn-ghost btn-circle avatar ${admin && 'online'}`}>
+                <label tabIndex="0" className={`btn btn-ghost btn-circle avatar ${admin ? 'online' : 'offline'}`}>
                   <div className="w-10 rounded-full ring ring-primary dark:ring-accent">
                     <img
                       src={

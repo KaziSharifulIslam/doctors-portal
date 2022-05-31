@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 const Users = () => {
     const [loggedUser] = useAuthState(auth);
-    const { data: users, isLoading, error, refetch } = useQuery('', () => fetch('http://localhost:5000/users', { method: 'get', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } }).then(res => res.json()))
+    const { data: users, isLoading, error, refetch } = useQuery('', () => fetch('https://doctors-portal-ks.herokuapp.com/users', { method: 'get', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } }).then(res => res.json()))
     if (isLoading) {
         return <Loading />
     }
@@ -18,7 +18,7 @@ const Users = () => {
         const proceed = window.confirm('Are You Sure?')
         if (proceed) {
 
-            fetch(`http://localhost:5000/user/delete/${email}`, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+            fetch(`https://doctors-portal-ks.herokuapp.com/user/delete/${email}`, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
                 .then(res => {
                     if (res.status === 403) {
                         toast.error("You can't delete user!")
@@ -37,7 +37,7 @@ const Users = () => {
         const proceed = window.confirm('Are You Sure?')
         if (proceed) {
 
-            fetch(`http://localhost:5000/user/admin/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+            fetch(`https://doctors-portal-ks.herokuapp.com/user/admin/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
                 .then(res => {
                     console.log(res)
                     if (res.status === 403) {
@@ -58,7 +58,7 @@ const Users = () => {
         const proceed = window.confirm('Are You Sure?')
         if (proceed) {
 
-            fetch(`http://localhost:5000/user/remove/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}`, 'content-type': 'application/json' } })
+            fetch(`https://doctors-portal-ks.herokuapp.com/user/remove/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}`, 'content-type': 'application/json' } })
                 .then(res => {
                     console.log(res)
                     if (res.status === 403) {

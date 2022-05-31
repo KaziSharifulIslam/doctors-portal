@@ -6,14 +6,14 @@ const useToken = (user) => {
     const email = user?.user?.email;
     const currentUser = { email };
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://doctors-portal-ks.herokuapp.com/user/${email}`, {
         method: "PUT",
         body: JSON.stringify(currentUser),
         headers: { "content-type": "application/json" },
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           const accessToken = data.token;
           localStorage.setItem('accessToken', accessToken);
           setToken(accessToken);

@@ -8,7 +8,7 @@ import Loading from "../shared/Loading";
 const MyAppointments = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`http://localhost:5000/appointments/?email=${user?.email}`, {
+  const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`https://doctors-portal-ks.herokuapp.com/appointments/?email=${user?.email}`, {
     method: 'GET',
     headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
   })
@@ -25,7 +25,7 @@ const MyAppointments = () => {
   const deleteAppointment = () => {
     const proceed = window.confirm('Are you suer?')
     if (proceed) {
-      fetch(`http://localhost:5000/appointment/delete/${user?.email}`, { method: 'DELETE' })
+      fetch(`https://doctors-portal-ks.herokuapp.com/appointment/delete/${user?.email}`, { method: 'DELETE' })
         .then(res => res.json())
         .then(data => {
           if (data.deletedCount) {
