@@ -16,62 +16,64 @@ const Users = () => {
 
     const deleteUser = (email) => {
         const proceed = window.confirm('Are You Sure?')
-        if(proceed){
+        if (proceed) {
 
-            fetch(`http://localhost:5000/user/delete/${email}`, { method: 'DELETE' , headers: {'authorization': `Bearer ${localStorage.getItem('accessToken')}`} })
-            .then(res => {
-                if(res.status === 403){
-                    toast.error("You can't delete user!")
-                }
-                return res.json()
-            })
-            .then(data => {
-                if (data.deletedCount) {
-                    refetch();
-                }
-            })
+            fetch(`http://localhost:5000/user/delete/${email}`, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+                .then(res => {
+                    if (res.status === 403) {
+                        toast.error("You can't delete user!")
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    if (data.deletedCount) {
+                        refetch();
+                    }
+                })
         }
     }
 
     const makeAdmin = email => {
         const proceed = window.confirm('Are You Sure?')
-        if(proceed){
+        if (proceed) {
 
-            fetch(`http://localhost:5000/user/admin/${email}`, { method: 'put' , headers: {'authorization': `Bearer ${localStorage.getItem('accessToken')}`}})
-            .then(res => {
-                console.log(res)
-                if(res.status === 403){
-                    toast.error('You are not Allowed to make admin');
-                }
-                return res.json()
-            })
-            .then(data => {
-                if (data.modifiedCount) {
-                    refetch();
-                    toast.success(`The user is now an Admin!`)
-                }
-            })
+            fetch(`http://localhost:5000/user/admin/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+                .then(res => {
+                    console.log(res)
+                    if (res.status === 403) {
+                        toast.error('You are not Allowed to make admin');
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    if (data.modifiedCount) {
+                        refetch();
+                        toast.success(`The user is now an Admin!`)
+                    }
+                })
         }
 
     }
     const removeAdmin = email => {
         const proceed = window.confirm('Are You Sure?')
-        if(proceed){
+        if (proceed) {
 
-            fetch(`http://localhost:5000/user/remove/${email}`, { method: 'put' , headers: {'authorization': `Bearer ${localStorage.getItem('accessToken')}`, 'content-type': 'application/json'}})
-            .then(res => {
-                console.log(res)
-                if(res.status === 403){
-                    toast.error('You are not Allowed to remove admin');
-                }
-                return res.json()
-            })
-            .then(data => {
-                if (data.modifiedCount) {
-                    refetch();
-                    toast.success(`Removed from Admin!`)
-                }
-            })
+            fetch(`http://localhost:5000/user/remove/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}`, 'content-type': 'application/json' } })
+                .then(res => {
+                    console.log(res)
+                    if (res.status === 403) {
+                        toast.error('You are not Allowed to remove admin');
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    console.log(data.reason)
+                    if (data.modifiedCount) {
+                        refetch();
+                        toast.success(`Removed from Admin!`)
+                    }
+                    if (data.reason === 'selft') toast.warn('You can\'t remove yourself')
+                })
         }
 
     }
@@ -100,7 +102,7 @@ const Users = () => {
                             users?.map((a, index) => (
                                 <tr key={index}>
                                     <td className="text-xs">{index + 1}</td>
-                                    <td className="text-xs">{a.email} {a.email === loggedUser.email && <div className="indicator-item badge badge-accent" style={{transform: 'translate(-14%, -42%)'}}>me</div>} </td>
+                                    <td className="text-xs">{a.email} {a.email === loggedUser.email && <div className="indicator-item badge badge-accent" style={{ transform: 'translate(-14%, -42%)' }}>me</div>} </td>
                                     <td className="text-xs">{a.role}</td>
                                     <td className="text-xs">
                                         {a.role !== 'admin' && <button className="btn btn-xs btn-info mr-2" onClick={() => makeAdmin(a.email)}>Make Admin</button>}

@@ -1,5 +1,6 @@
 import auth from "firebase.init";
 import { signOut } from "firebase/auth";
+import useAdmin from "hooks/useAdmin";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +8,8 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
+  console.log(admin)
   const navigate = useNavigate();
   // console.log(user);
   const menuItems = (
@@ -78,7 +81,7 @@ const Navbar = () => {
             {/* profile menu  */}
             {user && (
               <div className="dropdown dropdown-end">
-                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                <label tabIndex="0" className={`btn btn-ghost btn-circle avatar ${admin && 'online'}`}>
                   <div className="w-10 rounded-full ring ring-primary dark:ring-accent">
                     <img
                       src={

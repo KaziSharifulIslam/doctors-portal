@@ -10,13 +10,13 @@ const AvailableAppointments = ({ date, setDate }) => {
   const formatedDate = format(date, "PP");
 
   // react query instead of useEffect 
-  const {data: services ,isLoading, error, refetch} = useQuery(['available', formatedDate], ()=> fetch(`https://doctors-portal-ks.herokuapp.com/available/?date=${formatedDate}`)
+  const { data: services, isLoading, error, refetch } = useQuery(['available', formatedDate], () => fetch(`http://localhost:5000/available/?date=${formatedDate}`)
     .then((res) => res.json()));
-  
 
-    if(isLoading) return <Loading/>
-    if(error) console.log(error);
-  return (  
+
+  if (isLoading) return <Loading />
+  if (error) console.log(error);
+  return (
     <div>
       <div className="container mx-auto mb-12 pt-24 ">
         <p className="text-center text-xl text-secondary dark:text-accent">

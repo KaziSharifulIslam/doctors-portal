@@ -2,7 +2,7 @@ import Loading from "pages/shared/Loading";
 import React from "react";
 import {
   useAuthState,
-  useSendEmailVerification,
+  useSendEmailVerification
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";

@@ -29,6 +29,7 @@ const [showPass, setShowPass] = useState(false)
   useEffect(() => {
     if (token) {
       navigate(from, { replace: true });
+      // navigate('/')
     }
   }, [user, emailUser, token, from, navigate]);
 

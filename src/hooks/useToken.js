@@ -13,14 +13,14 @@ const useToken = (user) => {
       })
         .then((res) => res.json())
         .then((data) => {
-            // console.log(data);
-            const accessToken = data.token;
-            localStorage.setItem('accessToken', accessToken);
-            setToken(accessToken);
+          console.log(data);
+          const accessToken = data.token;
+          localStorage.setItem('accessToken', accessToken);
+          setToken(accessToken);
 
         });
     }
   }, [user]);
-  return [token,setToken];
+  return [token, setToken];
 };
 export default useToken;

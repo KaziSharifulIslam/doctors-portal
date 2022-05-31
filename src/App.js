@@ -4,6 +4,7 @@ import Users from "pages/dashboard/Users";
 import Register from "pages/login/Register";
 import NotFound from "pages/shared/NotFound";
 import Protected from "pages/shared/Protected";
+import RequireAdmin from "pages/shared/RequireAdmin";
 import "react-day-picker/dist/style.css";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -37,7 +38,7 @@ function App() {
           <Route index element={<MyAppointments/>} />
           <Route path="/dashboard/my-appointment" element={<MyAppointments/>} />
           <Route path="/dashboard/reviews" element={<Reviews/>} />
-          <Route path="/dashboard/users" element={<Users/>} />
+          <Route path="/dashboard/users" element={<RequireAdmin><Users/></RequireAdmin>} />
           {/* <Route path="/dashboard/profile" element={<UserProfile/>} /> */}
         </Route>
         
