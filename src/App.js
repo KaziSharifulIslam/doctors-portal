@@ -1,5 +1,7 @@
+import AddDoctor from "pages/dashboard/AddDoctor";
 import Dashboard from "pages/dashboard/Dashboard";
 import MyAppointments from "pages/dashboard/MyAppointments";
+import OurDoctors from "pages/dashboard/OurDoctors";
 import Users from "pages/dashboard/Users";
 import Register from "pages/login/Register";
 import NotFound from "pages/shared/NotFound";
@@ -39,7 +41,8 @@ function App() {
           <Route path="/dashboard/my-appointment" element={<MyAppointments/>} />
           <Route path="/dashboard/reviews" element={<Reviews/>} />
           <Route path="/dashboard/users" element={<RequireAdmin><Users/></RequireAdmin>} />
-          {/* <Route path="/dashboard/profile" element={<UserProfile/>} /> */}
+          <Route path="/dashboard/add-doctor" element={<RequireAdmin><AddDoctor/></RequireAdmin>} />
+          <Route path="/dashboard/doctors" element={<RequireAdmin><OurDoctors/></RequireAdmin>} />
         </Route>
         
         <Route path="/contact-us" element={<Contact />} />
