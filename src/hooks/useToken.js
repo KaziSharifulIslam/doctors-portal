@@ -9,7 +9,7 @@ const useToken = (user) => {
       fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         body: JSON.stringify(currentUser),
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", 'authorization': `Bearer ${localStorage.getItem('accessToken')}` },
       })
         .then((res) => res.json())
         .then((data) => {

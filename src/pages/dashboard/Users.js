@@ -73,7 +73,7 @@ const Users = () => {
     return (
         <div>
             <h2 className='text-center'>All Users : {users?.length} </h2>
-            <div className="overflow-x-auto h-[80vh] shadow-xl rounded-lg my-12 mx-2 md:mx-auto max-w-2xl">
+            <div className="overflow-x-auto shadow-xl rounded-lg my-12 mx-2 md:mx-auto max-w-2xl">
                 <table className="table w-full  ">
                     <thead className="sticky top-0">
                         <tr>

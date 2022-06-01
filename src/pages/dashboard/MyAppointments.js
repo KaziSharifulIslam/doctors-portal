@@ -3,6 +3,7 @@ import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
 
 const MyAppointments = () => {
@@ -23,17 +24,14 @@ const MyAppointments = () => {
     }))
   if (isLoading) return <Loading />
   const deleteAppointment = () => {
-    const proceed = window.confirm('Are you suer?')
-    if (proceed) {
-      fetch(`http://localhost:5000/appointment/delete/${user?.email}`, { method: 'DELETE' })
-        .then(res => res.json())
-        .then(data => {
-          if (data.deletedCount) {
-            refetch();
-          }
-        })
-
-    }
+    fetch(`http://localhost:5000/appointment/delete/${user?.email}`, { method: 'DELETE' })
+      .then(res => res.json())
+      .then(data => {
+        if (data.deletedCount) {
+          toast.success('Appointment deleted!')
+          refetch();
+        }
+      })
   }
 
   if (error) {
@@ -42,7 +40,7 @@ const MyAppointments = () => {
   }
 
   return (
-    <div className="overflow-x-auto h-[80vh] shadow-xl rounded-lg my-12 mx-2 md:mx-auto max-w-4xl">
+    <div className="overflow-x-auto  shadow-xl rounded-lg my-12 mx-2 md:mx-auto max-w-4xl">
       <table className="table w-full  ">
         <thead className="sticky top-0">
           <tr>
@@ -74,7 +72,23 @@ const MyAppointments = () => {
                 <td className="text-xs">{a.email}</td>
                 <td className="text-xs">
                   <button className="btn btn-xs btn-success mr-2">Pay</button>
-                  <button className="btn btn-xs btn-warning" onClick={deleteAppointment}>Delete</button>
+                  <label htmlFor="appointment-delete-modal" className="btn btn-xs btn-warning">Delete</label>
+                </td>
+                <td>
+                  {/* modal content */}
+                  <div>
+                    <input type="checkbox" id="appointment-delete-modal" className="modal-toggle" />
+                    <div className="modal modal-bottom sm:modal-middle backdrop-blur-sm">
+                      <div className="modal-box">
+                        <h3 className="font-bold text-lg">Are you sure to delete the appointment?</h3>
+                        <p className="py-4">This action can't be undone!</p>
+                        <div className="modal-action">
+                          <label className="btn btn-sm btn-info mr-2 " htmlFor="appointment-delete-modal" >Cancel</label>
+                          <label className="btn btn-sm btn-warning" htmlFor="appointment-delete-modal" onClick={deleteAppointment}>Delete</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))

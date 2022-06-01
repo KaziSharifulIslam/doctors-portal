@@ -43,3 +43,7 @@
     max-width: 1300px !important;
   }
 }
+
+.Toastify__toast-container--top-right {
+  top: 5em;
+}
