@@ -18,6 +18,7 @@ const Navbar = () => {
       </li>
       <li tabIndex="0">
         <Link className="active:btn-accent" to="/about">About</Link>
+        <Link className="active:btn-accent" to="/html">HTML</Link>
       </li>
       <li>
         <Link className="active:btn-accent" to="/appointment">Appointment</Link>

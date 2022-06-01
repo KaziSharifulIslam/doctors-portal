@@ -22,39 +22,38 @@ const AddDoctor = () => {
      * 
     */
 
-    /*   const onSubmit = async (data, e) => {
-             e.preventDefault();
-             // console.log(data.image[0])
-             const imageApiKey = '3101e939fc0da0dff8ff9abf4fe236fd'
-             // const image = data.image[0]
-             const formData = new FormData();
-             formData.append('avatar', data.image[0])
-             fetch(`https://api.imgbb.com/1/upload?key=${imageApiKey}`, { method: 'POST', body: formData })
-                 .then(res => res.json())
-                 .then(data => console.log(data))
-         }  */
-    const onSubmit = async (data, e) => {
-        const doctor = { ...data };
-       fetch('http://localhost:5000/doctor', {
-           method: 'post',
-           headers: {'content-type': 'application/json',
-           'authorization': `Bearer ${localStorage.getItem('accessToken')}`},
-           body: JSON.stringify(doctor)
-       })
-       .then(res=> res.json())
-       .then(data => {
-           console.log(data);
-           if(data.insertedId) toast.success('Doctor added');
-           e.target.reset();
-       })
-    }
-
-    return (
+    const onSubmit = data => {
+        const imagebbApiKey = '3101e939fc0da0dff8ff9abf4fe236fd'
+        const formData = new FormData();
+        formData.append('image', data.image[0])
+        const url = `https://api.imgbb.com/1/upload?key=${imagebbApiKey}`
+        fetch(url, { method: 'post', body: formData }).then(res => res.json())
+            .then(result => {
+                console.log(result);
+                if(result.data.display_url){
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        specialty: data.specialty,
+                        image: result.data.display_url
+                    }
+                    console.log(doctor);
+                    fetch('http://localhost:5000/doctor', {method: 'post', headers: {'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}`}, body: JSON.stringify(doctor)})
+                    .then(res =>{
+                        console.log(res);
+                       return res.json();
+                    })
+                    .then(added=> {
+                        if(added.message) toast.info('Doctor Already Exist!!')
+                        if(added.insertedId) toast.success('Doctor Added Successfully!!')
+                    })
+                }
+            })
+   }
+  
+  
+   return (
         <div>
-            {/* <form onSubmit={uploadImage}>
-                    <input type="file" name="image" id="" />
-                    <input className='btn ' type="submit" value="upload" />
-                </form> */}
             <h2 className='text-2xl'>Add a new doctor.</h2>
             <div className="my-12">
 
@@ -120,24 +119,13 @@ const AddDoctor = () => {
                         />
                     </div>
 
-                    {/* <div className="form-control w-full">
+                    <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Image</span>
                             <span className="label-text"> {errors.image?.type === 'required' && "Image is required"}</span>
                         </label>
                         <input type="file"
                             className="w-full block text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            {...register("image", { required: true })}
-                        />
-                    </div> */}
-                    <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Image</span>
-                            <span className="label-text"> {errors.image?.type === 'required' && "Image is required"}</span>
-                        </label>
-                        <input type="text"
-                            placeholder="Image url"
-                            className="input input-bordered   w-full"
                             {...register("image", { required: true })}
                         />
                     </div>

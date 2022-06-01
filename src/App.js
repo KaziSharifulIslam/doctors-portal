@@ -3,6 +3,7 @@ import Dashboard from "pages/dashboard/Dashboard";
 import MyAppointments from "pages/dashboard/MyAppointments";
 import OurDoctors from "pages/dashboard/OurDoctors";
 import Users from "pages/dashboard/Users";
+import PowerfulTags from "pages/html/PowerfulTags";
 import Register from "pages/login/Register";
 import NotFound from "pages/shared/NotFound";
 import Protected from "pages/shared/Protected";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/html" element={<PowerfulTags />} />
         <Route
           path="/appointment"
           element={

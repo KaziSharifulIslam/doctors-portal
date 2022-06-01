@@ -8,10 +8,10 @@ const Banner = () => {
   return (
     <div style={{background: `url(${bg})`}} className="min-h-screen flex justify-center flex-col container mx-auto py-16 px-4">
       <div
-        className="container mx-auto pb-24"
+        className=" mx-auto pb-24"
         style={{ backgroundImage: `url: ${bg}` }}
       >
-        <div className="flex flex-col lg:flex-row-reverse">
+        <div className="flex  flex-col lg:flex-row-reverse">
           <img
             src={chair}
             className="max-w-lg rounded-lg shadow-2xl m-8"
