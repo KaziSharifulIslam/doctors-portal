@@ -9,7 +9,7 @@ const PowerfulTags = () => {
                 <del>
                     <p>“I apologize for the delay.”</p>
                 </del>
-                <ins cite="../howtobeawizard.html" datetime="2018-05">
+                <ins cite="../howtobeawizard.html" dateTime="2018-05">
                     <p>“A wizard is never late …”</p>
                 </ins>
                 <p> please press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to re-render an mdn page </p>
@@ -23,7 +23,7 @@ const PowerfulTags = () => {
                 <label htmlFor="file">File progress: </label>
                 <progress id='file' max="100" value="80">80%</progress>
 
-                <label for="fuel">Fuel level:</label>
+                <label htmlFor="fuel">Fuel level:</label>
 
                 <meter id="fuel"
                     min="0" max="200"

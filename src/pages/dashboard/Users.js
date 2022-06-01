@@ -77,7 +77,7 @@ const Users = () => {
                 <table className="table w-full  ">
                     <thead className="sticky top-0">
                         <tr>
-                            <th>SL</th>
+                            <th>SL</th>     
                             <th>Email</th>
                             <th>Role</th>
                             <th>Action</th>
