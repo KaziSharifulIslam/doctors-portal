@@ -27,14 +27,14 @@ const UserProfile = () => {
     isLoading,
     refetch,
   } = useQuery("profile", () =>
-    fetch(`https://doctors-portal-ks.herokuapp.com/user/${user?.email}`).then((res) => res.json())
+    fetch(`http://localhost:5000/user/${user?.email}`).then((res) => res.json())
   );
   if (isLoading) return <Loading />;
   const { address, bio, education, facebook, linkedin, profileName } = profile;
 
   const onSubmit = (data) => {
     console.log(data);
-    fetch(`https://doctors-portal-ks.herokuapp.com/update/${user?.email}`, {
+    fetch(`http://localhost:5000/update/${user?.email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("access_token")}`,

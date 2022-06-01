@@ -1,11 +1,12 @@
 import Loading from 'pages/shared/Loading';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 
 const AddDoctor = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const [uploading, setUploading] = useState(false);
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()))
     if (isLoading) return <Loading />
 
@@ -22,14 +23,21 @@ const AddDoctor = () => {
      * 
     */
 
+     const processing =
+     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+  
+
     const onSubmit = data => {
+        setUploading(true);
         const imagebbApiKey = '3101e939fc0da0dff8ff9abf4fe236fd'
         const formData = new FormData();
         formData.append('image', data.image[0])
         const url = `https://api.imgbb.com/1/upload?key=${imagebbApiKey}`
         fetch(url, { method: 'post', body: formData }).then(res => res.json())
             .then(result => {
-                console.log(result);
                 if(result.data.display_url){
                     const doctor = {
                         name: data.name,
@@ -37,15 +45,15 @@ const AddDoctor = () => {
                         specialty: data.specialty,
                         image: result.data.display_url
                     }
-                    console.log(doctor);
                     fetch('http://localhost:5000/doctor', {method: 'post', headers: {'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}`}, body: JSON.stringify(doctor)})
-                    .then(res =>{
-                        console.log(res);
-                       return res.json();
-                    })
+                    .then(res => res.json())
                     .then(added=> {
                         if(added.message) toast.info('Doctor Already Exist!!')
-                        if(added.insertedId) toast.success('Doctor Added Successfully!!')
+                        if(added.insertedId){
+                            toast.success('Doctor Added Successfully!!');
+                            reset();
+                            setUploading(false);
+                        }
                     })
                 }
             })
@@ -56,8 +64,6 @@ const AddDoctor = () => {
         <div>
             <h2 className='text-2xl'>Add a new doctor.</h2>
             <div className="my-12">
-
-
                 <form
                     className="grid grid-cols-1 items-center gap-2 w-full max-w-md mx-auto"
                     onSubmit={handleSubmit(onSubmit)}
@@ -129,15 +135,13 @@ const AddDoctor = () => {
                             {...register("image", { required: true })}
                         />
                     </div>
-                    <input
-                        type="submit"
-                        value="Add Doctor"
-                        className="btn btn-accent text-white w-full"
-                    />
+                    <button className="btn btn-accent text-white w-full">{uploading && processing} Add Doctor</button>
                 </form>
             </div>
         </div>
     );
 };
+
+
 
 export default AddDoctor;

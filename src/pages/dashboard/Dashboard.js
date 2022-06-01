@@ -33,9 +33,9 @@ const Dashboard = () => {
             <li> <Link to="/dashboard/my-appointment">My Appointments</Link></li>
             <li> <Link to="/dashboard/reviews">My Reviews</Link> </li>
             {admin && <>
-              <li><Link to="/dashboard/users">All Users</Link></li>
+              <li><Link to="/dashboard/users">Manage Users</Link></li>
               <li><Link to="/dashboard/add-doctor">Add Doctor</Link></li>
-              <li><Link to="/dashboard/doctors">Our Doctors</Link></li>
+              <li><Link to="/dashboard/doctors">Manage Doctors</Link></li>
             </>}
             <li><Link to="/dashboard/profile">My Profile</Link></li>
           </ul>

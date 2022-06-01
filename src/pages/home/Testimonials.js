@@ -15,8 +15,8 @@ const Testimonials = () => {
     <section className="mb-24 px-4">
       <div className="flex justify-between items-center container mx-auto">
         <div className="">
-          <h2 className="text-secondary dark:text-accent text-xl">Testimonials</h2>
-          <h3 className="text-3xl">What Our Patients Says</h3>
+          <h2 className="text-secondary dark:text-accent text-xl font-bold">Testimonials</h2>
+          <h3 className="text-3xl dark:text-gray-200">What Our Patients Says</h3>
         </div>
         <div>
           <img src={quote} alt="" className="w-24 lg:w-48" />

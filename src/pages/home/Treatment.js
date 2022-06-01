@@ -4,7 +4,7 @@ import Primarybutton from "../shared/Primarybutton";
 
 const Treatment = () => {
   return (
-    <div className="hero min-h-screen px-4 py-20">
+    <div className="hero px-4 py-24 mb-48">
       <div className="hero-content flex-col lg:flex-row p-0">
         <img
           src={treatment}
@@ -12,7 +12,7 @@ const Treatment = () => {
           alt=""
         />
         <div className="lg:w-6/12">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-5xl font-bold dark:text-gray-200">
             Exceptional Dental Care, on Your Terms
           </h1>
           <p className="py-6">
