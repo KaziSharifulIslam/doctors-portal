@@ -20,6 +20,8 @@ import Reviews from "./pages/dashboard/Reviews";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Navbar from "./pages/shared/Navbar";
+import Payment from "pages/dashboard/Payment";
+import UserProfile from "pages/dashboard/UserProfile";
 
 function App() {
   return (
@@ -29,30 +31,25 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/html" element={<PowerfulTags />} />
-        <Route
-          path="/appointment"
-          element={
-            <Protected>
-              <Appointment />
-            </Protected>
-          }sfdsf
-        />
-        <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}>
-          <Route index element={<MyAppointments/>} />
-          <Route path="/dashboard/my-appointment" element={<MyAppointments/>} />
-          <Route path="/dashboard/reviews" element={<Reviews/>} />
-          <Route path="/dashboard/users" element={<RequireAdmin><Users/></RequireAdmin>} />
-          <Route path="/dashboard/add-doctor" element={<RequireAdmin><AddDoctor/></RequireAdmin>} />
-          <Route path="/dashboard/doctors" element={<RequireAdmin><ManageDoctors/></RequireAdmin>} />
+        <Route path="/appointment" element={<Protected>  <Appointment />  </Protected>} />
+        <Route path="/dashboard" element={<Protected><Dashboard /></Protected>}>
+          <Route index element={<MyAppointments />} />
+          <Route path="my-appointment" element={<MyAppointments />} />
+          <Route path="payment/:paymentId" element={<Payment />} />
+          <Route path="reviews" element={<Reviews />} />
+          <Route path="users" element={<RequireAdmin><Users /></RequireAdmin>} />
+          <Route path="add-doctor" element={<RequireAdmin><AddDoctor /></RequireAdmin>} />
+          <Route path="doctors" element={<RequireAdmin><ManageDoctors /></RequireAdmin>} />
         </Route>
-        
+
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer position="top-left" draggable />
     </div>
   );
 }

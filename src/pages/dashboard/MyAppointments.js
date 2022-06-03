@@ -3,14 +3,16 @@ import { signOut } from "firebase/auth";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
+import './myappointment.css'
 
 const MyAppointments = () => {
   const [showModal, setShowModal] = useState(null)
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const [showTransaction, setShowTransaction] = useState(false);
   const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`http://localhost:5000/appointments/?email=${user?.email}`, {
     method: 'GET',
     headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
@@ -40,9 +42,11 @@ const MyAppointments = () => {
     console.log(error)
     return;
   }
-  if (isLoading) return <Loading />
+  if (isLoading){
+    return <Loading />
+  }
 
-
+// console.log(appointments)
   return (
     <div className="overflow-x-auto  shadow-xl rounded-lg my-12 mx-2 md:mx-auto max-w-4xl">
       <table className="table w-full  ">
@@ -53,6 +57,7 @@ const MyAppointments = () => {
             <th>Treatment</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Price</th>
             <th>Email</th>
             <th>Action</th>
           </tr>
@@ -81,10 +86,13 @@ const MyAppointments = () => {
                 <td className="text-xs">{a.treatment}</td>
                 <td className="text-xs">{a.date}</td>
                 <td className="text-xs">{a.slot}</td>
+                <td className="text-xs">${a.price}</td>
                 <td className="text-xs">{a.email}</td>
                 <td className="text-xs">
-                  <button className="btn btn-xs btn-success mr-2">Pay</button>
+                  {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`} className="btn btn-xs btn-info text-white mr-2">Pay</Link>}
+                  {a.paid && <span className="btn btn-xs mr-2 btn-success text-white" onClick={()=> setShowTransaction(!showTransaction)}>Show</span>}
                   <label onClick={() => setShowModal(a)} htmlFor="delete-modal" className="btn btn-xs btn-warning">Delete</label>
+                  {showTransaction && <p className="text-info mt-1">Transaction ID: {a.transactionId} </p>}
                 </td>
               </tr>
             ))

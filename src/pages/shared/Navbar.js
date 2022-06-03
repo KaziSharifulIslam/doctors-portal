@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [admin] = useAdmin(user);
   const navigate = useNavigate();
   // console.log(user);
@@ -29,7 +29,7 @@ const Navbar = () => {
       </li>
       {!user && (
         <li>
-          <Link className="btn btn-outline btn-secondary dark:btn-accent dark:bg-white login-btn" to="/login">
+          <Link disabled={loading} className="btn btn-outline btn-secondary dark:btn-accent dark:bg-white login-btn" to="/login">
             Login
           </Link>
         </li>
@@ -99,16 +99,13 @@ const Navbar = () => {
                 >
                   {user.displayName && (
                     <li>
-                      <Link to="/dashboard/profile" className="justify-between">
-                        {user?.displayName}
+                      <Link to="/profile" className="justify-between">
+                        {user?.displayName} <span className="badge badge-secondary">profile</span>
                       </Link>
                     </li>
                   )}
                   <li>
                     <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
-                    <a href="#!">Settings</a>
                   </li>
                   <li>
                     {user && (

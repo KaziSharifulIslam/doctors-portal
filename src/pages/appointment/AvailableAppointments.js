@@ -13,9 +13,9 @@ const AvailableAppointments = ({ date, setDate }) => {
   const { data: services, isLoading, error, refetch } = useQuery(['available', formatedDate], () => fetch(`http://localhost:5000/available/?date=${formatedDate}`)
     .then((res) => res.json()));
 
-
   if (isLoading) return <Loading />
   if (error) console.log(error);
+
   return (
     <div>
       <div className="container mx-auto mb-12 pt-24 ">
@@ -46,7 +46,7 @@ const AvailableAppointments = ({ date, setDate }) => {
 };
 
 const SingleService = ({ service, setTreatment }) => {
-  const { name, slots } = service;
+  const { name, slots, price } = service;
   return (
     <div className="card w-80 max-w-md  shadow-lg text-center mx-auto">
       <div className="card-body items-center text-center">
@@ -64,6 +64,7 @@ const SingleService = ({ service, setTreatment }) => {
               <span>No space available today</span>
             )}
           </p>
+          <p className="badge my-1">Consultant Fee: ${price}</p>
         </div>
 
         <div className="card-actions justify-end">

@@ -1,0 +1,22 @@
+  /* Handle */
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #1FB2A6;
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #0a7269;
+}
+
+/* width */
+.overflow-x-auto::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #1fb2a621;
+    border-radius: 20px;
+  }
+  
