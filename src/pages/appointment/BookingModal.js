@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
   const formatedDate = format(date, "PP");
   const [user] = useAuthState(auth);
-  const { _id, name, slots, price} = treatment;
+  const { _id, name, slots, price } = treatment;
   const handleBooking = (e) => {
     e.preventDefault();
     const slot = e.target.slot.value;
@@ -21,7 +21,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
       email: user.email,
       phone: e.target.phone.value,
     };
-    fetch("http://localhost:5000/booking", {
+    fetch("https://doctors-portal-ks.herokuapp.com/booking", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(booking),

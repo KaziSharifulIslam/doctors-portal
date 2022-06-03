@@ -10,10 +10,10 @@ import CheckoutForm from './CheckoutForm';
 const stripePromise = loadStripe('pk_test_51L5ycwFcD9YuPHOIDavT4T1vxCZ4VT0NJsbVMLBsOdwfNrQfvAkScyIxzoAmcapWsGrRe0hG3RUPMBvk0HBxYxsa00uejp7M5h');
 const Payment = () => {
     const { paymentId } = useParams();
-    
-    const url = `http://localhost:5000/booking/${paymentId}`;
+
+    const url = `https://doctors-portal-ks.herokuapp.com/booking/${paymentId}`;
     const { data: appointment, isLoading } = useQuery('data', () => fetch(url, {
-    method: 'get', headers: { 'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+        method: 'get', headers: { 'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
     }).then(res => res.json()));
     if (isLoading) return <Loading />
     const { treatment, slot, price, date, patientName } = appointment;
@@ -56,7 +56,7 @@ const Payment = () => {
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">Pay for - {treatment}</h2>
                             <h1 className="text-white text-3xl title-font font-medium mb-6">{treatment}</h1>
                             <Elements stripe={stripePromise}>
-                                <CheckoutForm appointment={appointment}  />
+                                <CheckoutForm appointment={appointment} />
                             </Elements>
                         </div>
                     </div>

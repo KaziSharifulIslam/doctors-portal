@@ -6,14 +6,14 @@ import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
-import './myappointment.css'
+import './myappointment.css';
 
 const MyAppointments = () => {
   const [showModal, setShowModal] = useState(null)
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const [showTransaction, setShowTransaction] = useState(false);
-  const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`http://localhost:5000/appointments/?email=${user?.email}`, {
+  const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`https://doctors-portal-ks.herokuapp.com/appointments/?email=${user?.email}`, {
     method: 'GET',
     headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
   })
@@ -27,7 +27,7 @@ const MyAppointments = () => {
       return res.json();
     }))
   const deleteAppointment = () => {
-    fetch(`http://localhost:5000/appointment/delete/${user?.email}`, { method: 'DELETE' })
+    fetch(`https://doctors-portal-ks.herokuapp.com/appointment/delete/${user?.email}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(data => {
         if (data.deletedCount) {
@@ -42,11 +42,11 @@ const MyAppointments = () => {
     console.log(error)
     return;
   }
-  if (isLoading){
+  if (isLoading) {
     return <Loading />
   }
 
-// console.log(appointments)
+  // console.log(appointments)
   return (
     <div className="overflow-x-auto  shadow-xl rounded-lg my-12 mx-2 md:mx-auto max-w-4xl">
       <table className="table w-full  ">
@@ -90,7 +90,7 @@ const MyAppointments = () => {
                 <td className="text-xs">{a.email}</td>
                 <td className="text-xs">
                   {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`} className="btn btn-xs btn-info text-white mr-2">Pay</Link>}
-                  {a.paid && <span className="btn btn-xs mr-2 btn-success text-white" onClick={()=> setShowTransaction(!showTransaction)}>Show</span>}
+                  {a.paid && <span className="btn btn-xs mr-2 btn-success text-white" onClick={() => setShowTransaction(!showTransaction)}>Show</span>}
                   <label onClick={() => setShowModal(a)} htmlFor="delete-modal" className="btn btn-xs btn-warning">Delete</label>
                   {showTransaction && <p className="text-info mt-1">Transaction ID: {a.transactionId} </p>}
                 </td>

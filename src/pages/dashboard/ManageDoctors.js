@@ -4,12 +4,12 @@ import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 
 const OurDoctors = () => {
-  const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('http://localhost:5000/doctors', { method: 'get', headers: { 'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+  const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('https://doctors-portal-ks.herokuapp.com/doctors', { method: 'get', headers: { 'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
     .then(res => res.json()));
   if (isLoading) return <Loading />
 
   const deleteDoctor = id => {
-    const url = `http://localhost:5000/doctor/${id}`;
+    const url = `https://doctors-portal-ks.herokuapp.com/doctor/${id}`;
     fetch(url, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
       .then(res => res.json())
       .then(data => {

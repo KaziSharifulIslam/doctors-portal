@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const AddDoctor = () => {
     const [uploading, setUploading] = useState(false);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()))
+    const { data: services, isLoading } = useQuery('services', () => fetch('https://doctors-portal-ks.herokuapp.com/service').then(res => res.json()))
     if (isLoading) return <Loading />
 
     // 3 ways to store image 
@@ -23,12 +23,12 @@ const AddDoctor = () => {
      * 
     */
 
-     const processing =
-     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
-  
+    const processing =
+        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+
 
     const onSubmit = data => {
         setUploading(true);
@@ -38,29 +38,29 @@ const AddDoctor = () => {
         const url = `https://api.imgbb.com/1/upload?key=${imagebbApiKey}`
         fetch(url, { method: 'post', body: formData }).then(res => res.json())
             .then(result => {
-                if(result.data.display_url){
+                if (result.data.display_url) {
                     const doctor = {
                         name: data.name,
                         email: data.email,
                         specialty: data.specialty,
                         image: result.data.display_url
                     }
-                    fetch('http://localhost:5000/doctor', {method: 'post', headers: {'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}`}, body: JSON.stringify(doctor)})
-                    .then(res => res.json())
-                    .then(added=> {
-                        if(added.message) toast.info('Doctor Already Exist!!')
-                        if(added.insertedId){
-                            toast.success('Doctor Added Successfully!!');
-                            reset();
-                            setUploading(false);
-                        }
-                    })
+                    fetch('https://doctors-portal-ks.herokuapp.com/doctor', { method: 'post', headers: { 'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }, body: JSON.stringify(doctor) })
+                        .then(res => res.json())
+                        .then(added => {
+                            if (added.message) toast.info('Doctor Already Exist!!')
+                            if (added.insertedId) {
+                                toast.success('Doctor Added Successfully!!');
+                                reset();
+                                setUploading(false);
+                            }
+                        })
                 }
             })
-   }
-  
-  
-   return (
+    }
+
+
+    return (
         <div>
             <h2 className='text-2xl'>Add a new doctor.</h2>
             <div className="my-12">

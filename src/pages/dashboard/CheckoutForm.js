@@ -13,7 +13,7 @@ const CheckoutForm = ({ appointment }) => {
     const { price, patientName, email, _id } = appointment;
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://doctors-portal-ks.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -71,10 +71,10 @@ const CheckoutForm = ({ appointment }) => {
             setSuccess('')
         } else {
             setTransactionId(paymentIntent.id);
-            fetch(`http://localhost:5000/appointment/${_id}`, {
+            fetch(`https://doctors-portal-ks.herokuapp.com/appointment/${_id}`, {
                 method: 'PATCH',
                 headers: { 'content-type': 'application/json', authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-                body: JSON.stringify({transactionId: paymentIntent.id})
+                body: JSON.stringify({ transactionId: paymentIntent.id })
             }).then(res => res.json()).then(data => {
                 if (data.modifiedCount) {
                     setCardError('');
