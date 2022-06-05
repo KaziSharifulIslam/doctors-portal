@@ -12,7 +12,6 @@ const MyAppointments = () => {
   const [showModal, setShowModal] = useState(null)
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const [showTransaction, setShowTransaction] = useState(false);
   const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`https://doctors-portal-ks.herokuapp.com/appointments/?email=${user?.email}`, {
     method: 'GET',
     headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
@@ -59,6 +58,8 @@ const MyAppointments = () => {
             <th>Time</th>
             <th>Price</th>
             <th>Email</th>
+            <th>Status</th>
+            <th>Transaction ID</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -88,11 +89,11 @@ const MyAppointments = () => {
                 <td className="text-xs">{a.slot}</td>
                 <td className="text-xs">${a.price}</td>
                 <td className="text-xs">{a.email}</td>
+                <td className="text-xs">{a.paid ? <span className="text-white bg-success w-full block text-center px-2 py-1 rounded font-bold uppercase">PAID</span> : <span className="text-white bg-warning px-2 py-1 rounded font-bold uppercase">UNPAID</span> } </td>
+                <td className="text-xs">{a.transactionId ? <span className="text-info ml-2">{a.transactionId} </span> : <Link to={`/dashboard/payment/${a._id}`} className="btn w-full btn-xs btn-info text-white mr-2">Pay</Link>}</td>
                 <td className="text-xs">
-                  {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`} className="btn btn-xs btn-info text-white mr-2">Pay</Link>}
-                  {a.paid && <span className="btn btn-xs mr-2 btn-success text-white" onClick={() => setShowTransaction(!showTransaction)}>Show</span>}
                   <label onClick={() => setShowModal(a)} htmlFor="delete-modal" className="btn btn-xs btn-warning">Delete</label>
-                  {showTransaction && <p className="text-info mt-1">Transaction ID: {a.transactionId} </p>}
+                  
                 </td>
               </tr>
             ))
