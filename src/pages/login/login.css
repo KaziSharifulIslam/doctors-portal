@@ -1,0 +1,10 @@
+
+.eye {
+    position: absolute;
+    line-height: 45px;
+    margin-left: -45px;
+    margin-top: .9rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
