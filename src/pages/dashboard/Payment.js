@@ -11,7 +11,7 @@ const stripePromise = loadStripe('pk_test_51L5ycwFcD9YuPHOIDavT4T1vxCZ4VT0NJsbVM
 const Payment = () => {
     const { paymentId } = useParams();
 
-    const url = `https://doctors-portal-ks.herokuapp.com/booking/${paymentId}`;
+    const url = `${process.env.REACT_APP_APP_SERVER_URI}/booking/${paymentId}`;
     const { data: appointment, isLoading } = useQuery('data', () => fetch(url, {
         method: 'get', headers: { 'content-type': 'application/json', 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
     }).then(res => res.json()));

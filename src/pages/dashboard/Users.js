@@ -18,7 +18,7 @@ const Users = () => {
         const proceed = window.confirm('Are You Sure?')
         if (proceed) {
 
-            fetch(`https://doctors-portal-ks.herokuapp.com/user/delete/${email}`, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+            fetch(`${process.env.REACT_APP_APP_SERVER_URI}/user/delete/${email}`, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
                 .then(res => {
                     if (res.status === 403) {
                         toast.error("User can't be deleted!")
@@ -37,7 +37,7 @@ const Users = () => {
         const proceed = window.confirm('Are You Sure?')
         if (proceed) {
 
-            fetch(`https://doctors-portal-ks.herokuapp.com/user/admin/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
+            fetch(`${process.env.REACT_APP_APP_SERVER_URI}/user/admin/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
                 .then(res => {
                     console.log(res)
                     if (res.status === 403) {
@@ -58,7 +58,7 @@ const Users = () => {
         const proceed = window.confirm('Are You Sure?')
         if (proceed) {
 
-            fetch(`https://doctors-portal-ks.herokuapp.com/user/remove/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}`, 'content-type': 'application/json' } })
+            fetch(`${process.env.REACT_APP_APP_SERVER_URI}/user/remove/${email}`, { method: 'put', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}`, 'content-type': 'application/json' } })
                 .then(res => res.json())
                 .then(data => {
                     if (data.reason) toast.warn('You can\'t remove yourself')

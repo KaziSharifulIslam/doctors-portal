@@ -12,7 +12,7 @@ const MyAppointments = () => {
   const [showModal, setShowModal] = useState(null)
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`https://doctors-portal-ks.herokuapp.com/appointments/?email=${user?.email}`, {
+  const { data: appointments, isLoading, error, refetch } = useQuery('appointments', () => fetch(`${process.env.REACT_APP_APP_SERVER_URI}/appointments/?email=${user?.email}`, {
     method: 'GET',
     headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
   })
@@ -26,7 +26,7 @@ const MyAppointments = () => {
       return res.json();
     }))
   const deleteAppointment = () => {
-    fetch(`https://doctors-portal-ks.herokuapp.com/appointment/delete/${user?.email}`, { method: 'DELETE' })
+    fetch(`${process.env.REACT_APP_APP_SERVER_URI}/appointment/delete/${user?.email}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(data => {
         if (data.deletedCount) {
@@ -89,11 +89,11 @@ const MyAppointments = () => {
                 <td className="text-xs">{a.slot}</td>
                 <td className="text-xs">${a.price}</td>
                 <td className="text-xs">{a.email}</td>
-                <td className="text-xs">{a.paid ? <span className="text-white bg-success w-full block text-center px-2 py-1 rounded font-bold uppercase">PAID</span> : <span className="text-white bg-warning px-2 py-1 rounded font-bold uppercase">UNPAID</span> } </td>
+                <td className="text-xs">{a.paid ? <span className="text-white bg-success w-full block text-center px-2 py-1 rounded font-bold uppercase">PAID</span> : <span className="text-white bg-warning px-2 py-1 rounded font-bold uppercase">UNPAID</span>} </td>
                 <td className="text-xs">{a.transactionId ? <span className="text-info ml-2">{a.transactionId} </span> : <Link to={`/dashboard/payment/${a._id}`} className="btn w-full btn-xs btn-info text-white mr-2">Pay</Link>}</td>
                 <td className="text-xs">
                   <label onClick={() => setShowModal(a)} htmlFor="delete-modal" className="btn btn-xs btn-warning">Delete</label>
-                  
+
                 </td>
               </tr>
             ))

@@ -9,7 +9,7 @@ const OurDoctors = () => {
   if (isLoading) return <Loading />
 
   const deleteDoctor = id => {
-    const url = `https://doctors-portal-ks.herokuapp.com/doctor/${id}`;
+    const url = `${process.env.REACT_APP_APP_SERVER_URI}/doctor/${id}`;
     fetch(url, { method: 'DELETE', headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
       .then(res => res.json())
       .then(data => {

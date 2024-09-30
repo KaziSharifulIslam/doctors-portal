@@ -71,7 +71,7 @@ const CheckoutForm = ({ appointment }) => {
             setSuccess('')
         } else {
             setTransactionId(paymentIntent.id);
-            fetch(`https://doctors-portal-ks.herokuapp.com/appointment/${_id}`, {
+            fetch(`${process.env.REACT_APP_APP_SERVER_URI}/appointment/${_id}`, {
                 method: 'PATCH',
                 headers: { 'content-type': 'application/json', authorization: `Bearer ${localStorage.getItem('accessToken')}` },
                 body: JSON.stringify({ transactionId: paymentIntent.id })
